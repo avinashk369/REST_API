@@ -3,23 +3,32 @@ Laravel API Setup
 	laravel new projectName
     cd projectName to go to the working directory as from now on any dependency will be injeted in the working directory
 //passport is a tool to set up REST environment
+
 	composer require laravel/passport
+
 //this will create required table 
-	php artisan migrate
+
+php artisan migrate
+
 //this will create client id and client secret
-	php artisan passport:install
+
+php artisan passport:install
+
 //in user model class add 
 	use Laravel\Passport\HasApiTokens;[this will create accessToken]
 	and add use HasApiTokens,Notifiable; as well
+
 //add passport dependency in AuthServiceProvider class and map passport route in boot function
 	use Laravel\Passport\Passport;
 	app/Providers/AuthServiceProvider.php
 	Passport::routes();
+
 //add this line into config/auth.php
 	'api' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+
 //add this into route/api.php
 	Route::post('register', 'API\RegisterController@register');
 	Route::post('login', 'API\RegisterController@login');
