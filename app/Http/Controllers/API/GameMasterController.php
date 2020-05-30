@@ -6,6 +6,7 @@ use App\GameMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 
 class GameMasterController extends Controller
 {
@@ -17,25 +18,21 @@ class GameMasterController extends Controller
     public function index()
     {
         try {
-            $gameMaster = GameMaster::get();
+            /* echo now();
+            exit; */
+            //where('created_on', '<=', now())->
+            //withTotalPlayers()->
+            $gameMaster = GameMaster::whereDate('created_at', Carbon::today())->get();
             if($gameMaster!=null)
                 return response()->json($gameMaster, 200);
             else
                 return response()->json(['message'=>"No data available"], 401);
         } catch (\Throwable $th) {
-            return response()->json(['message'=>"No data available"], 401);
+            return response()->json(['message'=>$th->getMessage()], 403);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return "create";
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -62,11 +59,9 @@ class GameMasterController extends Controller
         if($validator->fails()){
             return response()->json(['message'=>$validator->errors()], 401);
         }
-            
+        
         try {
-            $input = $request->all();
-            $gameMaster = new GameMaster($request->toArray());
-            $gameMaster->save();
+            $gameMaster = GameMaster::create($request->all());
             return response()->json($gameMaster, 200);
         } catch (\Throwable $th) {
             $message = "Could not save request!";
@@ -92,16 +87,7 @@ class GameMasterController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\GameMaster  $gameMaster
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(GameMaster $gameMaster)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -113,7 +99,6 @@ class GameMasterController extends Controller
     public function update(Request $request, GameMaster $gameMaster)
     {
         try {
-            
             $gameMaster->update($request->all());
             return response()->json($gameMaster, 200);
         } catch (\Throwable $th) {

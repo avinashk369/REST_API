@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(function () {
     //Route::get('/users', 'API\UserController@list');//get all users
     Route::apiResources([
         'game' => 'API\GameMasterController', //CRUD action
+        'user' => 'API\UserController',
         'gameType' => 'API\GameTypeController',
         'kyc' => 'API\KycMasterController',
         'offer' => 'API\OfferMasterController', // NOT in v1
