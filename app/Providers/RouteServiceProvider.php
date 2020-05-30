@@ -4,6 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\GameMaster;
+use App\GameType;
+use App\KycMaster;
+use App\OfferMaster;
+use App\ResultMaster;
+use App\TransactionMaster;
+use App\UserGameMaster;
+use App\WalletMaster;
+use App\WinnerMaster;
+use App\WithdrawMaster;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -32,6 +42,17 @@ class RouteServiceProvider extends ServiceProvider
     {
         //
 
+        //parent::boot();
+        Route::model('game', GameMaster::class);
+        Route::model('gameType', GameType::class);
+        Route::model('kyc', KycMaster::class);
+        Route::model('offer', OfferMaster::class);
+        Route::model('result', ResultMaster::class);
+        Route::model('transaction', TransactionMaster::class);
+        Route::model('userGame', UserGameMaster::class);
+        Route::model('wallet', WalletMaster::class);
+        Route::model('winner', WinnerMaster::class);
+        Route::model('withdraw', WithdrawMaster::class);
         parent::boot();
     }
 

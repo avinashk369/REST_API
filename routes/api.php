@@ -14,11 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 
-
+Route::middleware('auth:api')->group(function () {
+    
+    //Route::get('/users', 'API\UserController@list');//get all users
+    Route::apiResources([
+        'game' => 'API\GameMasterController', //CRUD action
+        'gameType' => 'API\GameTypeController',
+        'kyc' => 'API\KycMasterController',
+        'offer' => 'API\OfferMasterController', // NOT in v1
+        'result' => 'API\ResultMasterController',
+        'transaction' => 'API\TransactionMasterController',
+        'userGame' => 'API\UserGameMasterController',
+        'wallet' => 'API\WalletMasterController',
+        'winner' => 'API\WinnerMasterController',
+        'withdraw' => 'API\WithdrawMasterController',
+    ]);
+});
