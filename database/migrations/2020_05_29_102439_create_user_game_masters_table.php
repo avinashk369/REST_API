@@ -20,9 +20,9 @@ class CreateUserGameMastersTable extends Migration
             $table->integer('l_num')->nullable();
             $table->integer('r_num')->nullable();
             $table->string('pair_num')->nullable();
-            $table->boolean('is_left')->nullable();
-            $table->boolean('is_right')->nullable();
-            $table->boolean('is_pair')->nullable();
+            $table->boolean('is_left')->nullable()->default(0);
+            $table->boolean('is_right')->nullable()->default(0);
+            $table->boolean('is_pair')->nullable()->default(0);
             $table->double('bet_amount',8,2);
             $table->string('flags',5)->default('00000');
             $table->timestamps();

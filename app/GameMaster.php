@@ -30,10 +30,28 @@ class GameMaster extends Model
         return Carbon::parse($value)->format('Y-m-d H:i:s');
     }
 
+    
+    //to get nested relation use 'users.user'
+    //protected $with = ['users'];
+
     public function scopeWithTotalPlayers($query)
     {
-        $query->addSelect(['total_player' => UserGameMaster::select('id')
-            ->whereColumn('game_id', 'game_master.id')
-        ])->count();
+        $query->addSelect(['totalusers' => UserGameMaster
+                ::selectRaw('count(*)')
+                ->whereColumn('game_id', 'game_master.id')
+            ]);
+    }
+
+
+    // Only active games
+    public function scopeWithActive( $query, $active = false ) {
+        $isActive = $active ? '1': '0';
+        $query->where( \DB::raw('substr(flags, 1, 1)'), '=', $isActive );
+    }
+
+    //relation
+    public function users()
+    {
+        return $this->hasMany('App\UserGameMaster','game_id');
     }
 }

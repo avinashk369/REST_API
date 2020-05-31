@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\GameMaster;
+use App\UserGameMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -21,8 +22,12 @@ class GameMasterController extends Controller
             /* echo now();
             exit; */
             //where('created_on', '<=', now())->
-            //withTotalPlayers()->
-            $gameMaster = GameMaster::whereDate('created_at', Carbon::today())->get();
+            //whereDate('created_at', Carbon::today())->
+            //with('users.user')->
+            $gameMaster = GameMaster::
+            withTotalPlayers()
+            ->withActive(true)
+            ->get();
             if($gameMaster!=null)
                 return response()->json($gameMaster, 200);
             else

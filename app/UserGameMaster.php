@@ -12,6 +12,12 @@ class UserGameMaster extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    protected $casts = [
+        'is_left' => 'boolean',
+        'is_right' => 'boolean',
+        'is_pair' => 'boolean',
+    ];
+
     //protected $dateFormat = 'U';
 
     public function setCreatedAtAttribute($value)
@@ -33,12 +39,18 @@ class UserGameMaster extends Model
     }
 
 
-    protected $with = ['games'];
+    //protected $with = ['games'];
 
     //relation
     public function games()
     {
-        return $this->hasOne('App\GameMaster','id')->where('flags','=', '10000');;
+        return $this->belongsTo('App\GameMaster','game_id');
+    }
+
+    //relation
+    public function user()
+    {
+        return $this->belongsTo('App\UserMaster','user_id');
     }
 
     
