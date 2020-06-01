@@ -29,4 +29,13 @@ class WinnerMaster extends Model
     {
         return Carbon::parse($value)->format('Y-m-d H:i:s');
     }
+
+    /**
+     * user game details 
+     */
+    public function usergames()
+    {
+        return $this->belongsTo('App\UserGameMaster','game_id');
+    }
+
 }

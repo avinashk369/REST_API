@@ -12,6 +12,11 @@ class UserGameMaster extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    /**
+     * this cast muttators can be help to covert data type and return them 
+     * like if my table has boolean field having 0,1 value
+     * that data can be converted into true false using muttator attribute
+     */
     protected $casts = [
         'is_left' => 'boolean',
         'is_right' => 'boolean',
@@ -41,17 +46,23 @@ class UserGameMaster extends Model
 
     //protected $with = ['games'];
 
-    //relation
+    /**
+     * game details 
+     */
     public function games()
     {
         return $this->belongsTo('App\GameMaster','game_id');
     }
 
-    //relation
+    /**
+     * user details
+     */
     public function user()
     {
         return $this->belongsTo('App\UserMaster','user_id');
     }
+
+    
 
     
 }

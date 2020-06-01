@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\UserGameMaster;
+use App\GameMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -19,14 +20,17 @@ class UserGameMasterController extends Controller
     {
         try {
             //list only active game mean today game only , use flag bit 1 for this
-            //$userGameMaster = UserGameMaster::get()->games();
-            $userGameMaster = UserGameMaster::with('games')->get();
+            $userGameMaster = UserGameMaster::with(['games' => function($query){
+                    GameMaster::withActive($query,true);
+            }
+            ])
+            ->get();
             if($userGameMaster!=null)
                 return response()->json($userGameMaster, 200);
             else
                 return response()->json(['message'=>"No data available"], 401);
         } catch (\Throwable $th) {
-            return response()->json(['message'=>"No data available"], 403);
+            return response()->json(['message'=>$th->getMessage()], 403);
         }
     }
 
@@ -53,9 +57,9 @@ class UserGameMasterController extends Controller
         if($validator->fails()){
             return response()->json(['message'=>$validator->errors()], 401);
         }
-        $userGameMaster = UserGameMaster::create($request->all());
+        
         try {
-            
+            $userGameMaster = UserGameMaster::create($request->all());    
             return response()->json($userGameMaster, 200);
         } catch (\Throwable $th) {
             $message = "Could not save request!";

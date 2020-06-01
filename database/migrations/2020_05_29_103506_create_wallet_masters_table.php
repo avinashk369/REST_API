@@ -16,9 +16,9 @@ class CreateWalletMastersTable extends Migration
         Schema::create('wallet_master', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
-            $table->double('cash_amount',8,2);
-            $table->double('promo_amount',8,2);
-            $table->double('avl_amount',8,2);
+            $table->double('cash_amount',8,2)->default(0);
+            $table->double('promo_amount',8,2)->default(0);
+            $table->double('avl_amount',8,2)->default(0);
             $table->string('flags',5)->default('00000');
             $table->timestamps();
         });

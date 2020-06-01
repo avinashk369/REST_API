@@ -8,6 +8,27 @@ use Illuminate\Http\Request;
 
 class WinnerMasterController extends Controller
 {
+
+    /**
+     * Return result of particular game
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function gameResult($userId)
+    {
+        try {
+            $winnerMaster = WinnerMaster::where('user_id',$userId)
+            ->with('usergames.games')
+            ->get();
+            if($winnerMaster!=null)
+                return response()->json($winnerMaster, 200);
+            else
+                return response()->json(['message'=>"No data available"], 401);
+        } catch (\Throwable $th) {
+            return response()->json(['message'=>$th->getMessage()], 403);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +39,7 @@ class WinnerMasterController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -50,16 +63,7 @@ class WinnerMasterController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\WinnerMaster  $winnerMaster
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(WinnerMaster $winnerMaster)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.

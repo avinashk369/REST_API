@@ -17,7 +17,9 @@ class CreateGameMastersTable extends Migration
             $table->id();
             $table->string('name',20);
             $table->string('tag_line',100);
-            $table->integer('prize');
+            $table->double('l_num_prize',8,2)->default(0);
+            $table->double('r_num_prize',8,2)->default(0);
+            $table->double('p_num_prize',8,2)->default(0);
             $table->boolean('is_offer');
             $table->bigInteger('offer_id')->nullable();
             $table->timestamp('result_time', 0);

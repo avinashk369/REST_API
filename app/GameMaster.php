@@ -4,6 +4,7 @@ namespace App;
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class GameMaster extends Model
 {
@@ -31,9 +32,15 @@ class GameMaster extends Model
     }
 
     
-    //to get nested relation use 'users.user'
+    /**
+     * to enable default listing of nested relation uncomment $with 
+     * to get nested relation use dot opertor like - 'users.user'
+     */
     //protected $with = ['users'];
 
+    /**
+     * use scope with filters to add additional column with eloqouent model 
+     */
     public function scopeWithTotalPlayers($query)
     {
         $query->addSelect(['totalusers' => UserGameMaster
@@ -43,15 +50,38 @@ class GameMaster extends Model
     }
 
 
-    // Only active games
+    /**
+     * return only active gave
+     */
     public function scopeWithActive( $query, $active = false ) {
-        $isActive = $active ? '1': '0';
-        $query->where( \DB::raw('substr(flags, 1, 1)'), '=', $isActive );
+        $this->withActive( $query, $active );
     }
 
-    //relation
+    protected function withActive( $query, $active = false ) {
+        $isActive = $active ? '1': '0';
+        $query->where(DB::raw('substr(flags, 1, 1)'), '=', $isActive );
+    }
+
+    /**
+     * Any game can have multiple users enrolled with
+     */
     public function users()
     {
         return $this->hasMany('App\UserGameMaster','game_id');
+    }
+
+
+    public function scopeWithLnum( $query) {
+        $query->where('result_master','game_master.r_num','=','result_master.r_num')
+        ->orWhere('result_master','game_master.l_num','=','result_master.l_num')
+        ->orWhere('result_master','game_master.p_num','=','result_master.p_num');
+    }
+
+    /**
+     * game result
+     */
+    public function result()
+    {
+        return $this->hasOne('App\ResultMaster','game_id');
     }
 }

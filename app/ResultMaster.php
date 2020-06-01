@@ -29,4 +29,13 @@ class ResultMaster extends Model
     {
         return Carbon::parse($value)->format('Y-m-d H:i:s');
     }
+
+    //protected $with = ['game'];
+    /**
+     * return its game 
+     */
+    public function game()
+    {
+        return $this->belongsTo('App\GameMaster','game_id');
+    }
 }

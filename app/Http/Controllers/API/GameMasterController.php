@@ -19,11 +19,8 @@ class GameMasterController extends Controller
     public function index()
     {
         try {
-            /* echo now();
-            exit; */
             //where('created_on', '<=', now())->
             //whereDate('created_at', Carbon::today())->
-            //with('users.user')->
             $gameMaster = GameMaster::
             withTotalPlayers()
             ->withActive(true)
@@ -50,13 +47,17 @@ class GameMasterController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'tag_line' => 'required',
-            'prize' => 'required',
+            'l_num_prize' => 'required',
+            'r_num_prize' => 'required',
+            'p_num_prize' => 'required',
             'is_offer' => 'required',
             'result_time' => 'required'
         ], [
             'name.required' => 'Name is required',
             'tag_line.required' => 'Tag line is required',
-            'prize.required' => 'Prize is required',
+            'l_num_prize.required' => 'Left number prize is required',
+            'r_num_prize.required' => 'Right number prize is required',
+            'p_num_prize.required' => 'Pair number prize is required',
             'is_offer.required' => 'Is offer is required',
             'result_time.required' => 'Result time is required',
         ]);

@@ -17,20 +17,26 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
 
+
 Route::middleware('auth:api')->group(function () {
     
     //Route::get('/users', 'API\UserController@list');//get all users
+    Route::get('result/game/{gameId}', 'API\ResultMasterController@gameResult');
+    Route::get('winner/game/{userId}', 'API\WinnerMasterController@gameResult');
+    Route::get('transaction/history/{userId}', 'API\TransactionMasterController@history');
+    Route::get('user/game/{userId}', 'API\UserController@games');
+    Route::get('user/gameResult/{userId}', 'API\UserController@gameResult');
     Route::apiResources([
         'game' => 'API\GameMasterController', //CRUD action
         'user' => 'API\UserController',
-        'gameType' => 'API\GameTypeController',
+        'gameType' => 'API\GameTypeController', //CRUD action
         'kyc' => 'API\KycMasterController',
         'offer' => 'API\OfferMasterController', // NOT in v1
-        'result' => 'API\ResultMasterController',
-        'transaction' => 'API\TransactionMasterController',
-        'userGame' => 'API\UserGameMasterController',
-        'wallet' => 'API\WalletMasterController',
-        'winner' => 'API\WinnerMasterController',
-        'withdraw' => 'API\WithdrawMasterController',
+        'result' => 'API\ResultMasterController', //CR action
+        'transaction' => 'API\TransactionMasterController', //CR action
+        'userGame' => 'API\UserGameMasterController', //CR action
+        'wallet' => 'API\WalletMasterController', //C action
+        'winner' => 'API\WinnerMasterController', //CR action
+        'withdraw' => 'API\WithdrawMasterController', // C action
     ]);
 });
