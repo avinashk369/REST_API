@@ -17,85 +17,56 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
 
-  <style>
-  img {
-    display: inline-block;
-    width: 100%; // Show 4 images in a row normally
-    height: auto;
-    opacity:70%
-}
-
-@media (max-width: 600px) {
-  img {
-    width: 100%; // Override width to show only one image in a row on smaller screens
-  }
-}
-.overlay{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgb(255,250,170);
-  opacity:30%;
-}
-
-  </style>
-
+ <style>
+ .bg-img{
+  background: url('{{asset('public/backend/img/photo1.png')}}') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+ }
+ </style> 
 </head>
-<body class="hold-transition lockscreen ">
-<img src="{{asset('public/frontend/assets/img/intro/banner-bg1.png')}}" alt="" >
-<div class="overlay"></div>
-<div class="card-img-overlay container">
+<body class="hold-transition login-page bg-img">
 <!-- Automatic element centering -->
-<div class="lockscreen-wrapper">
-  <div class="lockscreen-logo">
-    <a href="admin"><b>Fine</b> Kraft</a>
+<div class="login-box">
+  <div class="login-logo">
+    <img class="img-circle" src="{{asset('public/logo.png')}}" height="120"/>
   </div>
-  <!-- User name -->
-  <div class="lockscreen-name">Login</div>
-  
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-    <!-- lockscreen image -->
-    <div class="lockscreen-image">
-      <img src="public/fk.png" alt="User Image">
-    </div>
-    <!-- /.lockscreen-image -->
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
 
-    <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials" method="post" action="{{url('dashboard')}}">
-    {{ csrf_field() }}
-      <div class="input-group">
-        <input type="password" name="password" class="form-control" placeholder="password">
-
-        <div class="input-group-append">
-          <button type="submit" class="btn"><i class="fas fa-arrow-right text-muted"></i></button>
+      <form action="#" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="User name" name="username">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
         </div>
-      </div>
-    </form>
-    <!-- /.lockscreen credentials -->
-    
-  </div>
-  @if(Session::has('errors'))
-        <div class="alert alert-danger alert-dismissable">
-          {{ Session::get('errors') }}
-            @php
-            Session::forget('errors');
-            @endphp
-            <a class="close" data-dismiss="alert">&times;</a>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" name="password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
     </div>
-  @endif
-  <!-- /.lockscreen-item -->
-  <!-- <div class="help-block text-center">
-    Enter your password to retrieve your session
+    <!-- /.login-card-body -->
   </div>
-  
-  <div class="lockscreen-footer text-center">
-    Copyright &copy; 2014-2019 <b><a href="http://adminlte.io" class="text-black">Fine kraft</a></b><br>
-    All rights reserved
-  </div> -->
-</div>
+<!-- /.login-box -->
 <!-- /.center -->
 </div>
 

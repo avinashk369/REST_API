@@ -13,7 +13,7 @@ class AdminMaster extends Model
     protected $casts = [
         'is_admin' => 'boolean',
     ];
-
+ 
     //protected $dateFormat = 'U';
 
     public function setCreatedAtAttribute($value)

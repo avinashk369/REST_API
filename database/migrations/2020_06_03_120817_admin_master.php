@@ -19,7 +19,7 @@ class AdminMaster extends Migration
             $table->string('password',10);
             $table->boolean('is_admin');
             $table->string('flags',5)->default('00000');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
