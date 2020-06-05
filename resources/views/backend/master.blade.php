@@ -45,7 +45,7 @@
       
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
-        <a class="nav-link" href="{{url('admin/exit')}}">
+        <a class="nav-link" href="{{url('exit')}}">
           <i class="fa fa-power-off" aria-hidden="true"></i>
         </a>
       </li>
@@ -82,19 +82,19 @@
                with font-awesome or any other icon font library -->
           
           
-          <li class="nav-item">
-            <a href="{{url('admin/setups')}}" class="nav-link">
+          <!-- <li class="nav-item">
+            <a href="{{url('gameType')}}" class="nav-link">
               <i class="nav-icon fa fa-globe"></i>
-              <p>Site settings</p>
+              <p>Game types</p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a href="{{url('admin/home')}}" class="nav-link">
+            <a href="{{url('games')}}" class="nav-link">
               <i class="nav-icon far fa-image"></i>
-              <p>Banner image</p>
+              <p>Manage Games</p>
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="{{url('admin/service')}}" class="nav-link">
               <i class="nav-icon fa fa-cubes"></i>
               <p>Manage services</p>
@@ -112,7 +112,7 @@
               <i class="nav-icon fas fa fa-hashtag"></i>
               <p>Projects</p>
             </a>
-          </li>
+          </li> -->
           
         </ul>
       </nav>
