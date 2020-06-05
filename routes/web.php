@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\AdminAuth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('admin', 'admin\AdminController@admin');
+Route::post('login', 'admin\AdminController@adminLogin');
+
+Route::middleware([AdminAuth::class])->group(function () {
+    
+    Route::get('home', 'admin\AdminController@home');
+    Route::get('exit', 'admin\AdminController@exit');
+    //Route::get('gameType', 'admin\GameController@gameType'); // tempororily down
+    Route::get('games', 'admin\GameController@getGames');
+    
+
 });

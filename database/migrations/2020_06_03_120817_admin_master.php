@@ -16,7 +16,7 @@ class AdminMaster extends Migration
         Schema::create('admin_master', function (Blueprint $table) {
             $table->id();
             $table->string('user_name',20);
-            $table->string('password',10);
+            $table->string('password',200);
             $table->boolean('is_admin');
             $table->string('flags',5)->default('00000');
             $table->timestamps(); 

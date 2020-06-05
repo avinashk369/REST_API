@@ -37,10 +37,19 @@
   <div class="card">
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
-
-      <form action="#" method="post">
+        @if(Session::has('errors'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ Session::get('errors') }}
+              @php
+              Session::forget('errors');
+              @endphp
+              <a class="close" data-dismiss="alert">&times;</a>
+          </div>
+        @endif
+      <form method="post" action="{{url('login')}}">
+      {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="User name" name="username">
+          <input type="text" class="form-control" placeholder="User name" name="user_name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>

@@ -52,7 +52,7 @@ class GameMasterController extends Controller
             'r_num_prize' => 'required',
             'p_num_prize' => 'required',
             'is_offer' => 'required',
-            'result_time' => 'required'
+            'result_time' => 'required|unique:game_master'
         ], [
             'name.required' => 'Name is required',
             'tag_line.required' => 'Tag line is required',
@@ -61,6 +61,7 @@ class GameMasterController extends Controller
             'p_num_prize.required' => 'Pair number prize is required',
             'is_offer.required' => 'Is offer is required',
             'result_time.required' => 'Result time is required',
+            'result_time.unique' => 'A game is registered on this time',
         ]);
 
         if($validator->fails()){
