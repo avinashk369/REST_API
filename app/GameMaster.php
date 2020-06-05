@@ -51,7 +51,7 @@ class GameMaster extends Model
 
 
     public function scopeWithDateFilter($query,$dateFilter){
-        $this->whereDate('created_at', $dateFilter);
+        $this->withDateFilter($query, $dateFilter);
     }
 
     protected function withDateFilter( $query, $dateFilter) {
