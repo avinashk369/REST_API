@@ -1,0 +1,58 @@
+
+//registration & login
+
+{
+	"mobile":"9540621919",
+	"otp":"789456"
+	
+}
+
+//game create
+
+{
+	"name":"Morining",
+	"tag_line":"douoble dhamaka",
+	"l_num_prize":500,
+	"r_num_prize":500,
+	"p_num_prize":500,
+	"is_offer":1,
+	"result_time":"2020-05-29 07:53:23",
+	
+}
+
+//user game
+
+{
+	"user_id":1,
+	"game_id":7,
+	"r_num":1,
+	"is_right":1,
+	"bet_amount":100
+}
+
+//game type
+{
+	"name":"Left"
+}
+
+//result master
+{
+	"game_id":1,
+	"l_num":4,
+	"r_num":6,
+	"pair_num":"7,9"
+}
+
+//create wallet record
+{
+	"user_id":1,
+	"cash_amount":4,
+	"promo_amount":6,
+	"avl_amount":7
+}
+
+//withdraw record
+{
+	"user_id":1,
+	"w_amount":4
+}
