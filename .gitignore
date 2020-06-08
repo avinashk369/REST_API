@@ -10,3 +10,11 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+resources/views/backend/add/aboutUs.blade.php
+resources/views/backend/add/editHome.blade.php
+resources/views/backend/add/editProject.blade.php
+resources/views/backend/add/editService.blade.php
+resources/views/backend/add/home.blade.php
+resources/views/backend/add/projects.blade.php
+resources/views/backend/add/recent_mail.blade.php
+resources/views/backend/add/setups.blade.php

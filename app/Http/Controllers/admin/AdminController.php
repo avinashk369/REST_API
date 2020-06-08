@@ -29,21 +29,28 @@ class AdminController extends Controller
     }
 
     public function adminLogin(Request $request){
-        
-        $response = Http::post(Config::get('BaseConfig.BASE_URL').'admin/login', [
-            'user_name' => $request['user_name'],
-            'password' => $request['password'],
-        ]);
-        
-        if($response->successful() ){
-            $adminMaster =  json_decode(json_encode($response->json()), FALSE);
-            $request->session()->put('access_token',$adminMaster->access_token);
-            if($request->session()->has('access_token')){
-                return redirect()->intended('home');
-            }
+        try {
+            $parameters = json_encode($request->except(['_token']));
+            $response = Http::post(Config::get('BaseConfig.BASE_URL').'admin/login', $request->except(['_token']));
             
+            if($response->successful() ){
+                $adminMaster =  json_decode(json_encode($response->json()), FALSE);
+                $request->session()->put('access_token',$adminMaster->access_token);
+                if($request->session()->has('access_token')){
+                    return redirect()->intended('home');
+                }
+                
+            }
+            if($response->failed()){
+                $messgae = json_decode($response->body(),false);
+                return back()->with('errors', $messgae->message);
+            }
+        } catch (\Throwable $th) {
+            
+            return back()->with('errors', $th->getMessage());
         }
-        return back()->with('errors', "Authentication problem!");
+        
+        
     }
 
     public function exit(){

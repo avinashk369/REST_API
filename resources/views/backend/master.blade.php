@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Fine Kraft | Dashboard</title>
+  <title>Black horse | Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('public/plugins/fontawesome-free/css/all.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/backend/css/toastr.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/backend/css/tempusdominus-bootstrap-4.min.css')}}" />
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   
@@ -126,7 +127,7 @@
   </section>
 
   <footer class="main-footer">
-    <strong>Copyright &copy; 2020-2021 <a href="http://adminlte.io">Fine Kraft</a>.</strong>
+    <strong>Copyright &copy; 2020-2021 <a href="http://adminlte.io">Black horse</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.4
@@ -156,6 +157,8 @@
 <script src="{{asset('public/backend/js/toastr.min.js')}}"></script>
 <script src="{{asset('public/backend/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('public/backend/js/bs-custom-file-input.min.js')}}"></script>
+<script src="{{asset('public/backend/js/moment.min.js')}}"></script>
+<script src="{{asset('public/backend/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 <script type="text/javascript">
   $(function() {
     const Toast = Swal.mixin({
@@ -169,6 +172,10 @@
       toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
     });
 
+    //Timepicker
+  $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
     
   });
 
