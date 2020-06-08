@@ -17,7 +17,7 @@
                 <h3 class="card-title">Manage today's games</h3>
                 <div class="card-tools">
                   <ul class="pagination pagination-sm float-right">
-                  <a class="btn btn-dark float-right" href="{{url('game/add')}}" role="button">Add Game</a>
+                  <button type="button" class="btn btn-block btn-default float-right">Add Game</button>
                   </ul>
                 </div>
               </div>
@@ -32,7 +32,6 @@
                       <th>Pair Prize</th>
                       <th>Progress</th>
                       <th style="width: 40px">#Players</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -50,11 +49,6 @@
                                 </div>
                             </td>
                             <td><span class="badge bg-warning">{{$game->totalusers}}</span></td>
-                            <td>
-                              <a href="{{url('game/edit')}}/{{$game->id}}" class="btn btn-sm ">
-                                <i class="fa fa-edit"></i>
-                              </a>
-                            </td>
                         </tr>
                     
                     @endforeach
