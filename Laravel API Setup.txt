@@ -100,8 +100,40 @@ NOTE*
 DB transaction doesn't work with default db engine, so make sure to add 'innodb' in engine parameter into db configuration section
 
 
+NOTE*
+rename server.php to index.php and move .htaccess file from public folder to root directory 
+always use accept header parameter as Application/json
+otherwise some exception will be shown in html format
+
+NOTE*
+make resource controller use this command
+php artisan make:controller ControllerName --resource --model=ModelName --api
+
+NOTE*
+do not forget to add mapping into boot method of route service providerr class like below
+Route::model('game', GameMaster::class);
+        Route::model('gameType', GameType::class);
+        Route::model('kyc', KycMaster::class);
+        Route::model('offer', OfferMaster::class);
+        Route::model('result', ResultMaster::class);
+        Route::model('transaction', TransactionMaster::class);
+        Route::model('userGame', UserGameMaster::class);
+        Route::model('wallet', WalletMaster::class);
+        Route::model('winner', WinnerMaster::class);
+        Route::model('withdraw', WithdrawMaster::class);
+        parent::boot();
+
 
 Thats all 
 you configured your api
 run php artisan serve command to start the server and start hitting api endpoint like this
 http://localhost:8000/api/register
+
+
+DB_cred
+blackhorse
+CK9vWvjYj@eckNq
+
+ftp
+blackhorse@blackhorses.co.in
+o9@3SA?puU,G

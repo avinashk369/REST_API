@@ -3,52 +3,66 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
+              
+
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
+      <!-- bet count -->
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+          <div class="row">
+          @foreach($stats as $key=>$stat )
+         
+            <div class="col-12 col-sm-4">
+              <div class="info-box bg-light">
+                <div class="info-box-content">
+                  <span class="info-box-text text-center text-muted">Max bid on {{$key}} number</span>
+                  <span class="info-box-number text-center text-muted mb-0">
+                  <b class="text-info">{{ $stat->num ?? '0' }}</b> - <b class="text-danger">[{{ $stat->total ?? '0' }}]</b></span>
+                </div>
+              </div>
+            </div>
+            @endforeach
+            </div>
+          </div>
+        </div>
+    <!-- End of bet count -->
         <div class="row">
         
-          <div class="col-md-12">
+          <div class="col-md-8">
             <!-- general form elements -->
             
             <div class="card card-primary">
             
               <div class="card-header">
-                <h3 class="card-title">Manage today's games</h3>
+                <h3 class="card-title">{{$game->name}}</h3>
                 <div class="card-tools">
-                  <ul class="pagination pagination-sm float-right">
-                  <button type="button" class="btn btn-block btn-default float-right">Add Game</button>
+                <ul class="pagination pagination-sm float-right">
+                  <a class="btn btn-dark float-right" href="{{url('game/add')}}" role="button">Declare Result</a>
                   </ul>
                 </div>
               </div>
               <table class="table">
                   <thead>
                     <tr>
-                      <th style="width: 110px">Result time</th>
-                      <th>Name</th>
-                      <th>Tag line</th>
-                      <th># L Prize</th>
-                      <th># R Prize</th>
-                      <th>Pair Prize</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">#Players</th>
+                      <th>Mobile</th>
+                      <th># L Num</th>
+                      <th># R Num</th>
+                      <th>Pair Num</th>
+                      <th>Bet amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($games as $game )
+                    @foreach($game->users as $user )
                         <tr>
-                            <td><span class="badge bg-danger">{{substr($game->result_time,10)}}</span></td>
-                            <td><a href="{{url('admin')}}">{{$game->name}}</a></td>
-                            <td>{{$game->tag_line}}</td>
-                            <td>{{$game->l_num_prize}}</td>
-                            <td>{{$game->r_num_prize}}</td>
-                            <td>{{$game->p_num_prize}}</td>
-                            <td>
-                                <div class="progress progress-xs">
-                                <div class="progress-bar bg-success" style="width: {{$game->totalusers}}%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-warning">{{$game->totalusers}}</span></td>
+                            <td>{{$user->user->mobile}}</td>
+                            <td>{{ $user->l_num ?? 'NA' }}</td>
+                            <td>{{ $user->r_num ?? 'NA' }}</td>
+                            <td>{{ $user->pair_num ?? 'NA' }}</td>
+                            
+                            <td><span class="badge bg-warning">{{$user->bet_amount}}</span></td>
                         </tr>
                     
                     @endforeach
@@ -62,11 +76,32 @@
 
           </div>
 
-          <!-- <div class="col-md-2">
-            <div class="widget-user-image">
-              <img class="img-circle elevation-2" src="backend/img/user2-160x160.jpg" alt="User Avatar">
-            </div>
-          </div> -->
+            <!-- Right side table -->
+            <!-- <div class="col-md-4">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">{{$game->name}}</h3>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Number</th>
+                      <th>Bid count</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($game->users as $user )
+                        <tr>
+                            <td>{{$user->user->mobile}}</td>
+                            <td>{{ $user->l_num ?? 'NA' }}</td>
+                        </tr>
+                    
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div> -->
+            <!-- End of the right side table -->
         </div><!-- /.row -->
         
       </div><!-- /.container-fluid -->

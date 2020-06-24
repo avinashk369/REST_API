@@ -28,6 +28,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('transaction/history/{userId}', 'API\TransactionMasterController@history');
     Route::get('user/game/{userId}', 'API\UserController@games');
     Route::get('user/gameResult/{userId}', 'API\UserController@gameResult');
+    Route::get('game/player/{gameId}', 'API\GameMasterController@userInGame');
+    Route::get('game/stats/{gameId}', 'API\GameMasterController@totalCount');
+    
+
     Route::apiResources([
         'game' => 'API\GameMasterController', //CRUD action
         'user' => 'API\UserController',

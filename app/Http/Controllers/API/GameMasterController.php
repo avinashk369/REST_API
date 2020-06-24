@@ -4,13 +4,80 @@ namespace App\Http\Controllers\API;
 
 use App\GameMaster;
 use App\UserGameMaster;
+use App\UserMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use Carbon\Carbon;
+use DB;
 
 class GameMasterController extends Controller
 {
+
+    /**
+     * this function will return count of any particular column
+     * parameter -
+     * game_id
+     * coulmn_name
+     */
+    public function totalCount($gameId){
+        $ltotal = DB::table('user_game_master')
+        ->select('l_num as num', DB::raw('count(l_num) as total'))
+        ->where('game_id',$gameId)
+        ->groupBy('l_num')
+        ->orderBy(DB::raw('count(l_num)'),'DESC')
+        ->take(1)
+        ->first();
+        
+        
+        $rtotal = DB::table('user_game_master')
+        ->select('r_num as num', DB::raw('count(r_num) as total'))
+        ->where('game_id',$gameId)
+        ->groupBy('r_num')
+        ->orderBy(DB::raw('count(r_num)'),'DESC')
+        ->take(1)
+        ->first();
+
+        $ptotal = DB::table('user_game_master')
+        ->select('pair_num as num', DB::raw('count(pair_num) as total'))
+        ->where('game_id',$gameId)
+        ->groupBy('pair_num')
+        ->orderBy(DB::raw('count(pair_num)'), 'DESC')
+        ->take(1)
+        ->first();
+
+        $result = array("Left"=>$ltotal,
+                        "Right"=>$rtotal,
+                        "Pair"=>$ptotal);
+
+        return response()->json($result, 200);
+    }
+
+
+
+    /* this function will return all the users associated with requested game id
+     */
+
+     public function userInGame($gameId){
+
+        try {
+            $game = GameMaster::
+            with('users.user')
+            ->where('id',$gameId)->first();
+            if($game!=null)
+                return response()->json($game, 200);
+            else
+                return response()->json(['message'=>"No data available"], 401);
+
+        } catch (\Throwable $th) {
+            return response()->json(['message'=>$th->getMessage()], 403);
+        }
+        
+
+     }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -84,8 +151,12 @@ class GameMasterController extends Controller
      * @param  \App\GameMaster  $gameMaster
      * @return \Illuminate\Http\Response
      */
-    public function show(GameMaster $gameMaster)
+    public function show(Request $request, GameMaster $gameMaster)
     {
+        /* $header = $request->header();
+        print_r($header);
+        exit; */
+
         try {
             return response()->json($gameMaster, 200);
         } catch (\Throwable $th) {

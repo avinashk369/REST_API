@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\GameType;
+use App\GameMaster;
+use Carbon\Carbon;
 use Validator;
 use Session;
 use Illuminate\Support\Facades\Config;
@@ -64,6 +66,30 @@ class GameController extends Controller
          exit;
         return view('backend.screens.addgames');
      }
+
+     /**
+      * render detail srcreen for the games
+      * parameter -  game_id
+      */
+      public function gameDetail($gameId){
+        try {
+
+            $token = session()->get('access_token');
+            $response = Http::withToken($token)->get(Config::get('BaseConfig.BASE_URL').'game/player/'.$gameId);
+            if($response->successful() ){
+                $gameStats = Http::withToken($token)->get(Config::get('BaseConfig.BASE_URL').'game/stats/'.$gameId);
+                $game =  json_decode(json_encode($response->json()), FALSE);
+                $stats =  json_decode(json_encode($gameStats->json()), FALSE);
+                return view('backend.screens.gamedetails',['game'=>$game,'stats'=>$stats]);
+            }else{
+                return view('backend.commons.404');
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            return view('backend.commons.500');
+        }
+       //return view('backend.screens.gamedetails');
+    }
 
      /**
       * this function will save new game in the database

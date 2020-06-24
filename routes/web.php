@@ -20,10 +20,11 @@ Route::middleware([AdminAuth::class])->group(function () {
     
     Route::get('home', 'admin\AdminController@home');
     Route::get('exit', 'admin\AdminController@exit');
-    //Route::get('gameType', 'admin\GameController@gameType'); // tempororily down
+    Route::get('gameType', 'admin\GameController@gameType'); // tempororily down
     Route::get('games', 'admin\GameController@getGames');
     Route::get('game/add', 'admin\GameController@addGame');
     Route::post('game/add', 'admin\GameController@saveGame');
     Route::get('game/edit/{gameId}', 'admin\GameController@editGame');
+    Route::get('game/{gameId}', 'admin\GameController@gameDetail');
 
 });

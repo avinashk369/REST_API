@@ -39,7 +39,7 @@
                     @foreach($games as $game )
                         <tr>
                             <td><span class="badge bg-danger">{{substr($game->result_time,10)}}</span></td>
-                            <td><a href="{{url('admin')}}">{{$game->name}}</a></td>
+                            <td><a href="{{url('game')}}/{{$game->id}}">{{$game->name}}</a></td>
                             <td>{{$game->tag_line}}</td>
                             <td>{{$game->l_num_prize}}</td>
                             <td>{{$game->r_num_prize}}</td>
@@ -51,7 +51,7 @@
                             </td>
                             <td><span class="badge bg-warning">{{$game->totalusers}}</span></td>
                             <td>
-                              <a href="{{url('game/edit')}}/{{$game->id}}" class="btn btn-sm ">
+                              <a href="{{url('game')}}/{{$game->id}}" class="btn btn-sm ">
                                 <i class="fa fa-edit"></i>
                               </a>
                             </td>

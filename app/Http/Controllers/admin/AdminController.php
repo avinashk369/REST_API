@@ -25,7 +25,7 @@ class AdminController extends Controller
         if(!session()->has('access_token')){
             return view('backend.login');
         }
-        return redirect('home');
+        return redirect('games');
     }
 
     public function adminLogin(Request $request){
@@ -37,7 +37,7 @@ class AdminController extends Controller
                 $adminMaster =  json_decode(json_encode($response->json()), FALSE);
                 $request->session()->put('access_token',$adminMaster->access_token);
                 if($request->session()->has('access_token')){
-                    return redirect()->intended('home');
+                    return redirect()->intended('games');
                 }
                 
             }

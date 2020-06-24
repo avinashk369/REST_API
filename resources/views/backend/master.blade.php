@@ -59,9 +59,9 @@
   <aside class="main-sidebar sidebar-light-warning elevation-4">
     <!-- Brand Logo -->
     <a href="{{url('admin')}}" class="brand-link">
-      <img src="{{asset('public/backend/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="{{asset('public/logo.png')}}" alt="Black Horse" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">Fine Kraft</span>
+      <span class="brand-text font-weight-light">Black Horse</span>
     </a>
 
     <!-- Sidebar -->
@@ -95,13 +95,13 @@
               <p>Manage Games</p>
             </a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="{{url('admin/service')}}" class="nav-link">
+          <!--<li class="nav-item">
+            <a href="{{url('gameType')}}" class="nav-link">
               <i class="nav-icon fa fa-cubes"></i>
-              <p>Manage services</p>
+              <p>Manage game type</p>
             </a>
           </li>
-          <li class="nav-item">
+           <li class="nav-item">
             <a href="{{url('admin/aboutus')}}" class="nav-link">
               <i class="nav-icon fa fa-address-card"></i>
               <p>Manage about us</p>

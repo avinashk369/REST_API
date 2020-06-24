@@ -19,7 +19,7 @@
                     </div>
                 </div>
               @endif
-        <div class="col-md-6">
+        <div class="col-md-8">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
