@@ -26,5 +26,7 @@ Route::middleware([AdminAuth::class])->group(function () {
     Route::post('game/add', 'admin\GameController@saveGame');
     Route::get('game/edit/{gameId}', 'admin\GameController@editGame');
     Route::get('game/{gameId}', 'admin\GameController@gameDetail');
+    Route::get('game/result/{gameId}', 'admin\AdminController@gameResult');
+    Route::post('game/saveResult/{gameId}', 'admin\GameController@saveResult');
 
 });

@@ -140,7 +140,7 @@ class GameMasterController extends Controller
             return response()->json($gameMaster, 200);
         } catch (\Throwable $th) {
             $message = "Could not save request!";
-            return response()->json(['message'=>$message], 401);
+            return response()->json(['message'=>$th->getMessage()], 401);
         }
         
     }

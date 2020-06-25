@@ -4,10 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\UserGameMaster;
 use App\GameMaster;
+use App\WalletMaster;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use Carbon\Carbon;
+use DB;
 
 class UserGameMasterController extends Controller
 {
@@ -58,12 +60,25 @@ class UserGameMasterController extends Controller
             return response()->json(['message'=>$validator->errors()], 401);
         }
         
+        //DB transaction
+        DB::beginTransaction();
         try {
-            $userGameMaster = UserGameMaster::create($request->all());    
+            $userGameMaster = UserGameMaster::create($request->all());  
+            $walletMaster = WalletMaster::where('user_id',$userGameMaster->user_id)->first();
+            if(!is_null($walletMaster)){
+                $walletMaster->avl_amount = $walletMaster->avl_amount - $userGameMaster->bet_amount; 
+                $walletMaster->save();
+            }else{
+                DB::rollback();
+                $message = "Could not save request!";
+                return response()->json(['message'=>$message], 401);
+            } 
+            DB::commit();
             return response()->json($userGameMaster, 200);
         } catch (\Throwable $th) {
+            DB::rollback();
             $message = "Could not save request!";
-            return response()->json(['message'=>$message], 401);
+            return response()->json(['message'=>$th->getMessage()], 401);
         }
     }
 

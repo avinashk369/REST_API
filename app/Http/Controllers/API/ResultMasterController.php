@@ -87,8 +87,10 @@ class ResultMasterController extends Controller
             $winnerData = UserGameMaster::with(['games.users','games.result','games' => function($query){
                 GameMaster::withActive($query,true);
             }])
+            ->where('game_id',$request['game_id'])
             ->has('games.result')
             ->get();
+           
             
             foreach($winnerData as $winner){
                 if(is_null($winner->games) ){

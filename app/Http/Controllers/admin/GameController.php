@@ -14,6 +14,39 @@ use Illuminate\Support\Facades\Http;
 
 class GameController extends Controller
 {
+
+    /**
+     * this function will save the result for the given game
+     * parameters - 
+     * game_id,
+     */
+    public function saveResult(Request $request){
+
+        try {
+
+            if(!is_null($request['pair_num'])){
+                $pairNum = explode(",",$request['pair_num']);
+                
+                if(count($pairNum) < 2 || (is_null($pairNum[0]) || is_null($pairNum[1])))
+                    return back()->withErrors("Entrer pair number comma separated.i.e- 3,6");
+            }
+
+            $token = session()->get('access_token');
+            $response = Http::withToken($token)->post(Config::get('BaseConfig.BASE_URL').'result',$request->except(['_token']));
+            if($response->successful() ){
+                return back()->with('success','saved successfully');
+            }
+            if($response->failed()){
+                $messgae = json_decode($response->body(),false);
+                return back()->withErrors($messgae->message);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            return back()->withErrors($th->getMessage());
+        }
+    }
+
+
     /**
      * this function will return all the game types
      */
@@ -85,10 +118,8 @@ class GameController extends Controller
                 return view('backend.commons.404');
             }
         } catch (\Throwable $th) {
-            dd($th);
             return view('backend.commons.500');
         }
-       //return view('backend.screens.gamedetails');
     }
 
      /**
@@ -98,8 +129,13 @@ class GameController extends Controller
       public function saveGame(Request $request){
 
         try {
+            //10:31 AM
+            /* echo date("g:i a", strtotime("13:30"));
+            echo date("H:i", strtotime("10:30 PM"));
+            exit; */
             $todays = substr(now(),0,10);
-            $request['result_time'] =  $todays." ".$this->convertTime($request['result_time']);
+            $request['am_pm'] = explode(" ",$request['result_time'])[1];
+            $request['result_time'] =  $todays." ".explode(" ",$request['result_time'])[0].":00";
             $parameters = json_encode($request->except(['_token']));
             $token = session()->get('access_token');
             $response = Http::withToken($token)->post(Config::get('BaseConfig.BASE_URL').'game', $request->except(['_token']));

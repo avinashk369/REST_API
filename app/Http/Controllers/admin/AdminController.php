@@ -15,6 +15,25 @@ use Illuminate\Support\Facades\Http;
 class AdminController extends Controller
 {
 
+    /**
+     * this function will return the route to the result declaration screen
+     */
+    public function gameResult($gameId){
+        try {
+
+            $token = session()->get('access_token');
+            $response = Http::withToken($token)->get(Config::get('BaseConfig.BASE_URL').'game/player/'.$gameId);
+            if($response->successful() ){
+                $game =  json_decode(json_encode($response->json()), FALSE);
+                return view('backend.screens.result',['game'=>$game]);
+            }else{
+                return view('backend.commons.404');
+            }
+        } catch (\Throwable $th) {
+            return view('backend.commons.500');
+        }
+    }
+
     public function home(){
         return view('backend.screens.home');
     }

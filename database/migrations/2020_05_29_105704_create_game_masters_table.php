@@ -23,6 +23,7 @@ class CreateGameMastersTable extends Migration
             $table->boolean('is_offer');
             $table->bigInteger('offer_id')->nullable();
             $table->timestamp('result_time', 0);
+            $table->string('am_pm',2);
             $table->string('flags',5)->default('00000');
             $table->timestamps();
         });

@@ -40,7 +40,7 @@
                 <h3 class="card-title">{{$game->name}}</h3>
                 <div class="card-tools">
                 <ul class="pagination pagination-sm float-right">
-                  <a class="btn btn-dark float-right" href="{{url('game/add')}}" role="button">Declare Result</a>
+                  <a class="btn btn-dark float-right" href="{{url('game/result')}}/{{$game->id}}" role="button">Declare Result</a>
                   </ul>
                 </div>
               </div>

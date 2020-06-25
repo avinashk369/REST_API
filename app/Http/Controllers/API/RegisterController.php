@@ -30,6 +30,7 @@ class RegisterController extends Controller
             $user = UserMaster::create($input);
             $success['token'] =  $user->createToken('access_token')->accessToken;
             $success['mobile'] =  $user->mobile;
+            $success['id'] =  $user->id;
             return response()->json($success, 200);
         } catch (\Throwable $th) {
             return response()->json(['error'=>'Bad request'], 400);
@@ -45,6 +46,7 @@ class RegisterController extends Controller
             $user = Auth::user(); 
             $success['token'] =  $user->createToken('access_token')-> accessToken; 
             $success['mobile'] =  $user->mobile;
+            $success['id'] =  $user->id;
    
             return response()->json($success, 200);
         } 

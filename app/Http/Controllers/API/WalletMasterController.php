@@ -12,6 +12,23 @@ use DB;
 
 class WalletMasterController extends Controller
 {
+
+    /**
+     * this function will return user wallets details
+     * parameter - 
+     * user_id
+     */
+    public function walletDetail($userId){
+
+        try {
+            $walletMaster = WalletMaster::where('user_id',$userId)->firstOrFail();
+            return response()->json($walletMaster, 200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message'=>$th->getMessage()], 401);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
