@@ -67,6 +67,7 @@ class UserGameMasterController extends Controller
             $walletMaster = WalletMaster::where('user_id',$userGameMaster->user_id)->first();
             if(!is_null($walletMaster)){
                 $walletMaster->avl_amount = $walletMaster->avl_amount - $userGameMaster->bet_amount; 
+                $walletMaster->cash_amount = $walletMaster->cash_amount - $userGameMaster->bet_amount; 
                 $walletMaster->save();
             }else{
                 DB::rollback();

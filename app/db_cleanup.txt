@@ -1,1 +1,9 @@
 ALTER TABLE `game_master` ADD `am_pm` VARCHAR(2) NOT NULL DEFAULT '00' AFTER `result_time`;
+
+TRUNCATE `game_master`;
+TRUNCATE `result_master`;
+TRUNCATE `transaction_master`;
+TRUNCATE `user_game_master`;
+TRUNCATE `wallet_master`;
+TRUNCATE `winner_master`;
+TRUNCATE `withdraw_master`;

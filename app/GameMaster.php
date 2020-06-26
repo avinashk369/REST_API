@@ -43,13 +43,18 @@ class GameMaster extends Model
      */
     public function scopeWithTotalPlayers($query)
     {
+        $this->withTotalPlayers($query);
+    }
+    protected function withTotalPlayers( $query) {
         $query->addSelect(['totalusers' => UserGameMaster
                 ::selectRaw('count(*)')
                 ->whereColumn('game_id', 'game_master.id')
             ]);
     }
 
-
+    /**
+     * filter only today's game
+     */
     public function scopeWithDateFilter($query,$dateFilter){
         $this->withDateFilter($query, $dateFilter);
     }
@@ -86,6 +91,7 @@ class GameMaster extends Model
     }
 
     /**
+     * this fuction will have a mapping of result and the game
      * game result
      */
     public function result()

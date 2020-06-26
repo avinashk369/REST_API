@@ -42,12 +42,14 @@ class UserController extends Controller
             // list all the games which are active and created_at is today date
             $userGameMaster = UserGameMaster::where('user_id',$userId)
             ->with(['games' => function($query){
+                    GameMaster::withTotalPlayers($query);
                     GameMaster::withActive($query,true);
                     GameMaster::withDateFilter($query,Carbon::today());
                 }
                 ])
             ->get();
-            if($userGameMaster!=null)
+            
+            if(count($userGameMaster)>0)
                 return response()->json($userGameMaster, 200);
             else
                 return response()->json(['message'=>"No data available"], 401);

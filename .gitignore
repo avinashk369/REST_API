@@ -18,3 +18,7 @@ resources/views/backend/add/home.blade.php
 resources/views/backend/add/projects.blade.php
 resources/views/backend/add/recent_mail.blade.php
 resources/views/backend/add/setups.blade.php
+.rnd
+api_call.txt
+composer.lock
+app/db_cleanup.txt

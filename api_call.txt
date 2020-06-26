@@ -56,3 +56,10 @@
 	"user_id":1,
 	"w_amount":4
 }
+
+http://localhost/blackhorse/api/admin
+{
+	"user_name":"admin",
+	"password":"admin",
+	"is_admin":1
+}

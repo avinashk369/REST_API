@@ -89,7 +89,8 @@ class GameMasterController extends Controller
             //where('created_on', '<=', now())->
             //whereDate('created_at', Carbon::today())->
             $gameMaster = GameMaster::
-            withTotalPlayers()
+            whereRaw('1=1')
+            ->withTotalPlayers()
             ->withDateFilter(Carbon::today())
             ->withActive(true)
             ->get();
