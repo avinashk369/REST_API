@@ -23,10 +23,15 @@ Route::post('login', 'API\RegisterController@login');
 Route::middleware('auth:api')->group(function () {
     
     //Route::get('/users', 'API\UserController@list');//get all users
+    //this API will return result of any particular game
     Route::get('result/game/{gameId}', 'API\ResultMasterController@gameResult');
+    //this API will return all the game's result based on user id
+    //this API will help admin to check how many users are winner in any game
     Route::get('winner/game/{userId}', 'API\WinnerMasterController@gameResult');
     Route::get('transaction/history/{userId}', 'API\TransactionMasterController@history');
     Route::get('user/game/{userId}', 'API\UserController@games');
+    //this API will return all the game's result based on user id
+    //this API will return users list of games with its result
     Route::get('user/gameResult/{userId}', 'API\UserController@gameResult');
     Route::get('game/player/{gameId}', 'API\GameMasterController@userInGame');
     Route::get('game/stats/{gameId}', 'API\GameMasterController@totalCount');

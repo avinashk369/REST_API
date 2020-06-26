@@ -23,7 +23,7 @@ class ResultMasterController extends Controller
     public function gameResult($gameId)
     {
         try {
-            $resultMaster = ResultMaster::where('game_id',$gameId)->with('game')->first();
+            $resultMaster = ResultMaster::where('game_id',$gameId)->with('game.users')->first();
             if($resultMaster!=null)
                 return response()->json($resultMaster, 200);
             else

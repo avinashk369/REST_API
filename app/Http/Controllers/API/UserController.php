@@ -14,6 +14,7 @@ class UserController extends Controller
 {
 
     /**
+     * this function will return all the game's result based on user id
      * Return all result for the user
      *
      * @return \Illuminate\Http\Response
